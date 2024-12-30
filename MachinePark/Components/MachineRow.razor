@@ -1,0 +1,14 @@
+﻿@using MachinePark.Data
+@using Services
+@inject MachineService MachineService
+
+<tr>
+    <td>@Machine.Name</td>
+    <td>@Machine.Data</td>
+    <td>@Machine.Status</td>
+</tr>
+
+@code {
+    [Parameter]
+    public Machine Machine { get; set; } = new();
+}

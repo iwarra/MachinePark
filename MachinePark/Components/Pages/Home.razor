@@ -24,11 +24,7 @@ else
         <tbody>
             @foreach (var machine in machines)
             {
-                <tr>
-                    <td>@machine.Name</td>
-                    <td>@machine.Data</td>
-                    <td>@machine.Status</td>
-                </tr>
+                <MachineRow Machine="machine" />
             }
         </tbody>
     </table>
