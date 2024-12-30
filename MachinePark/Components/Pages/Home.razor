@@ -1,0 +1,45 @@
+﻿@page "/"
+@using MachinePark.Data
+@using Services
+@inject MachineService MachineService
+
+<PageTitle>Machines</PageTitle>
+
+<h1>Machines list</h1>
+
+@if (machines == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Data</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var machine in machines)
+            {
+                <tr>
+                    <td>@machine.Name</td>
+                    <td>@machine.Data</td>
+                    <td>@machine.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Machine>? machines;
+
+    protected override async Task OnInitializedAsync()
+    {
+        machines = await MachineService.GetMachinesAsync();
+    }
+}
+
