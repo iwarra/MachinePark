@@ -3,12 +3,27 @@
 @inject MachineService MachineService
 
 <tr>
+    <td>@Machine.Id</td>
     <td>@Machine.Name</td>
     <td>@Machine.Data</td>
     <td>@Machine.Status</td>
+    <td>
+        <button @onclick="EditMachine">Edit</button>
+        <button @onclick="DeleteMachine">Delete</button>
+    </td>
 </tr>
 
 @code {
     [Parameter]
     public Machine Machine { get; set; } = new();
+
+    private void EditMachine()
+    {
+        // Handle editing
+    }
+
+    private void DeleteMachine()
+    {
+        // Handle deletion
+    }
 }
