@@ -1,0 +1,12 @@
+﻿@using MachinePark.Data
+
+<h3>Machine Stats</h3>
+@if (Machines != null)
+{
+    <p>Total number of machines: @Machines.Count</p>
+}
+
+@code {
+    [Parameter]
+    public List<Machine>? Machines { get; set; } = new();
+}

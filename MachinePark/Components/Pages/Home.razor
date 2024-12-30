@@ -1,7 +1,8 @@
 ﻿@page "/"
 @using MachinePark.Data
 @using Services
-@inject MachineService MachineService
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
 
 <PageTitle>Machines</PageTitle>
 
@@ -13,7 +14,7 @@
 }
 else
 {
-    <table class="table">
+    <table class="table mt-5 mb-5">
         <thead>
             <tr>
                 <th>ID</th>
@@ -30,6 +31,8 @@ else
             }
         </tbody>
     </table>
+
+    <MachineStats Machines="machines"/>
 }
 
 @code {
@@ -37,7 +40,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        machines = await MachineService.GetMachinesAsync();
+        machines = await HttpClient.GetFromJsonAsync<List<Machine>>(NavigationManager.BaseUri + "machines");
+        // machines = await MachineService.GetMachinesAsync();
     }
 }
 
