@@ -1,14 +1,13 @@
 ﻿@page "/"
-@using MachinePark.Data
-@using Services
-@inject HttpClient HttpClient
-@inject NavigationManager NavigationManager
+@using MachinePark.Shared.Models;
+@using MachinePark.Shared.Services
+@inject MachineService MachineService
 
 <PageTitle>Machines</PageTitle>
 
 <h1>Machines list</h1>
 
-@if (machines == null)
+@if (MachineService.Machines == null)
 {
     <p>Loading...</p>
 }
@@ -25,7 +24,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var machine in machines)
+            @foreach (var machine in MachineService.Machines)
             {
                 <MachineRow Machine="machine" />
             }
@@ -40,8 +39,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        machines = await HttpClient.GetFromJsonAsync<List<Machine>>(NavigationManager.BaseUri + "machines");
-        // machines = await MachineService.GetMachinesAsync();
+        await MachineService.LoadMachinesAsync();
     }
 }
 

@@ -1,4 +1,4 @@
-﻿namespace MachinePark.Data
+﻿namespace MachinePark.Shared.Models
 {
     public class Machine
     {

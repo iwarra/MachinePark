@@ -1,0 +1,32 @@
+﻿@using MachinePark.Shared.Models
+@using MachinePark.Shared.Services
+@inject MachineService MachineService
+
+<tr>
+    <td>@Machine.Id</td>
+    <td>@Machine.Name</td>
+    <td>@Machine.Data</td>
+    <td>@Machine.Status</td>
+    <td>
+        <button class="btn btn-outline-primary">Send</button>
+        @if (Machine.Status == "Offline")
+        {
+            <button class="btn btn-outline-success" >Start</button>
+        } else
+        {
+            <button class="btn btn-outline-warning" >Stop</button>  
+        }
+        <button class="btn btn-outline-danger" @onclick="() => DeleteMachine(Machine.Id)">Delete</button>
+    </td>
+</tr>
+
+@code {
+    [Parameter]
+    public Machine Machine { get; set; } = new();
+
+    private async Task DeleteMachine(Guid id)
+    {
+        await MachineService.DeleteMachineAsync(id);
+        StateHasChanged();
+    }
+}
