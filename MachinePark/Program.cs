@@ -1,6 +1,6 @@
-using MachinePark.Components;
-using MachinePark.Services;
 using MachinePark.Data;
+using Microsoft.EntityFrameworkCore;
+using MachinePark.Shared.Services;
 
 namespace MachinePark
 {
@@ -10,55 +10,54 @@ namespace MachinePark
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddRazorComponents()
-                .AddInteractiveWebAssemblyComponents();
-
-            builder.Services.AddSingleton<MachineService>();
-            builder.Services.AddHttpClient();
-            builder.Services.AddSqlite<MachineParkContext>("Data Source=machine.db");
-
+            // Add services for API
             builder.Services.AddControllers();
 
+            // Configure the database context (SQLite)
+            builder.Services.AddSqlite<MachineParkContext>("Data Source=machine.db");
+
+            // Add services for your MachineService (backend logic)
+            builder.Services.AddScoped<MachineService>();
+
+            // Configure HttpClient if needed (used by your services or components)
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7207/") });
+
+            // Build the application
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline for API calls
             if (app.Environment.IsDevelopment())
             {
-                app.UseWebAssemblyDebugging();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
+            // Use HTTPS and static files for server-side components
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
-            app.UseAntiforgery();
 
-            app.MapRazorComponents<App>()
-                .AddInteractiveWebAssemblyRenderMode()
-                .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
-
+            // Add routing for controllers (API)
             app.UseRouting();
-            app.UseAntiforgery();
             app.MapControllers();
 
-            // Initialize the database
+            // Initialize the database and run migrations
             var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
             using (var scope = scopeFactory.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<MachineParkContext>();
-                if (db.Database.EnsureCreated())
+                if (db.Database.GetPendingMigrations().Any())
                 {
-                    SeedData.Initialize(db);
+                    db.Database.Migrate();
                 }
+                // Seed initial data if needed
+                SeedData.Initialize(db);
             }
 
-
+            // Run the application
             app.Run();
         }
     }

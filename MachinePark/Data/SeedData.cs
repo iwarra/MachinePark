@@ -1,19 +1,24 @@
-﻿namespace MachinePark.Data
+﻿using MachinePark.Shared.Models;
+
+namespace MachinePark.Data
 {
     public class SeedData
     {
         public static void Initialize(MachineParkContext db)
         {
-            var machines = new Machine[]
+            if (!db.Machines.Any())
             {
-                new Machine { Id = Guid.NewGuid(), Name = "Bulldozer", Data = "No data", Status = "Offline" },
-                new Machine { Id = Guid.NewGuid(), Name = "Excavator", Data = "Other data", Status = "Online" },
-                new Machine { Id = Guid.NewGuid(), Name = "Scraper", Data = "More data", Status = "Online" },
-                new Machine { Id = Guid.NewGuid(), Name = "Crane", Data = "Another data", Status = "Offline" },
-                new Machine { Id = Guid.NewGuid(), Name = "Roller", Data = "Even more data", Status = "Online" }
-            };
-            db.Machines.AddRange(machines);
-            db.SaveChanges();
+                var machines = new Machine[]
+                {
+                    new Machine { Id = Guid.NewGuid(), Name = "Bulldozer", Data = "No data", Status = "Offline" },
+                    new Machine { Id = Guid.NewGuid(), Name = "Excavator", Data = "Other data", Status = "Online" },
+                    new Machine { Id = Guid.NewGuid(), Name = "Scraper", Data = "More data", Status = "Online" },
+                    new Machine { Id = Guid.NewGuid(), Name = "Crane", Data = "Another data", Status = "Offline" },
+                    new Machine { Id = Guid.NewGuid(), Name = "Roller", Data = "Even more data", Status = "Online" }
+                };
+                db.Machines.AddRange(machines);
+                db.SaveChanges();
+            }
         }
     }
 }

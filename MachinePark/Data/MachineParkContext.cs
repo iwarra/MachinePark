@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MachinePark.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MachinePark.Data
 {

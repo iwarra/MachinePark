@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachinePark", "MachinePark\MachinePark.csproj", "{32311BD3-A6E7-4B7E-BE64-F5CC6972FA82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachinePark", "MachinePark\MachinePark.csproj", "{32311BD3-A6E7-4B7E-BE64-F5CC6972FA82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachinePark.Client", "MachinePark.Client\MachinePark.Client.csproj", "{FEDD0E1F-082C-4C97-90CB-5EBA8D145D4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachinePark.Client", "MachinePark.Client\MachinePark.Client.csproj", "{FEDD0E1F-082C-4C97-90CB-5EBA8D145D4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachinePark.Shared", "MachinePark.Shared\MachinePark.Shared.csproj", "{CDE5E205-05F6-4F8B-B5D7-533D21EF4D73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FEDD0E1F-082C-4C97-90CB-5EBA8D145D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEDD0E1F-082C-4C97-90CB-5EBA8D145D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEDD0E1F-082C-4C97-90CB-5EBA8D145D4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDE5E205-05F6-4F8B-B5D7-533D21EF4D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDE5E205-05F6-4F8B-B5D7-533D21EF4D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDE5E205-05F6-4F8B-B5D7-533D21EF4D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDE5E205-05F6-4F8B-B5D7-533D21EF4D73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
